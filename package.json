@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ThiagoCaron/sysexp#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "node-csv": "^0.1.2"
   }
 }
