@@ -1,0 +1,9 @@
+use("sample_mflix");
+
+//db.movies.find({year: {$nin: ["2014è", "2012è"]}}).sort({year: -1}).limit(2);
+
+//db.movies.find({year: "2014"}).count();
+
+//db.movies.updateMany({year: "2014è"},{$set: {year: 2014}})
+
+db.movies.find({genres: {$all: ["Crime","Drama"]}}).count();
