@@ -1,4 +1,12 @@
 // Seleciona o banco de dados
 use("sysexp");
 
-db.estoque.find({quantidade: {$gt:5}})
+db.estoque.find({});
+
+//db.estoque.find({quantidade: {$gt:5}});
+
+//db.estoque.find({}).count();
+
+//db.estoque.insertOne({nome:"abc", idade: 123, peso: 80});
+
+//db.estoque.deleteOne({_id: ObjectId("641a2fbdc282a0f9dca45f16")});
