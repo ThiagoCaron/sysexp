@@ -10,6 +10,9 @@ const mongodb = require("mongodb");
 const url_mongo = "mongodb+srv://ThiagoCaronServi:ThiagoCaron@cluster0.6sctrse.mongodb.net/?retryWrites=true&w=majority"
 
 const conexao = new mongodb.MongoClient(url_mongo);
+const estoque = conexao.db("sysexp").collection("estoque");
+
+const ObjectId = mongodb.ObjectId;
 
 
 // CRUD
@@ -33,14 +36,17 @@ app.get("/entradas", function(req, res)
 });
 
 app.get("/estoque", async function(req, res){
-    const estoque = conexao.db("sysexp").collection("estoque");
+    
     const resultado = await estoque.find({}).toArray();
     res.json(resultado);
 });
 
 // route dinamica
-app.get("/estoque/:id", function(req, res){
-    res.json(req.params)
+app.get("/estoque/:id", async function(req, res){
+    //res.json(req.params.id)
+    const id = new ObjectId(req.params.id);
+    const resultado = await estoque.findOne({_id: id});
+    res.json(resultado);
 });
 
 app.listen(port, () => 
