@@ -42,6 +42,19 @@ app.get("/estoque", async function(req, res){
     res.json(resultado);
 });
 
+app.get("/estoque-csv", async function(req, res){
+    const resultado = await estoque.find({}).toArray();
+    let arquivoCsv = "id,nota,destino,produto,quantidade\n";
+    resultado.forEach(function(item){
+        arquivoCsv += item._id + "," + item.nota + "," + item.destino + "," + item.produto + "," + item.quantidade + "\n";
+    });
+
+    res.append("content-type", "text/csv");
+    res.send(arquivoCsv);
+    //res.redirect("http://google.com");
+    //res.status(401).send(arquivoCsv);
+});
+
 // route dinamica
 app.get("/estoque/:id", async function(req, res){
     //res.json(req.params.id)
