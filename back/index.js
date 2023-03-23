@@ -2,11 +2,12 @@ const { json } = require("express");
 const express = require("express")
 const app = express()
 const port = 3000;
-
 var csv =  require("node-csv").createParser();
 
-const mongodb = require("mongodb");
+var cors = require("cors");
+app.use(cors());
 
+const mongodb = require("mongodb");
 const url_mongo = "mongodb+srv://ThiagoCaronServi:ThiagoCaron@cluster0.6sctrse.mongodb.net/?retryWrites=true&w=majority"
 
 const conexao = new mongodb.MongoClient(url_mongo);
