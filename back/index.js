@@ -6,6 +6,8 @@ var csv =  require("node-csv").createParser();
 
 var cors = require("cors");
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
 
 const mongodb = require("mongodb");
 const url_mongo = "mongodb+srv://ThiagoCaronServi:ThiagoCaron@cluster0.6sctrse.mongodb.net/?retryWrites=true&w=majority"
@@ -61,6 +63,22 @@ app.get("/estoque/:id", async function(req, res){
     const id = new ObjectId(req.params.id);
     const resultado = await estoque.findOne({_id: id});
     res.json(resultado);
+});
+
+// cadastra novo item
+app.post("/estoque-add", async function(req, res){
+    const resultado = await estoque.insertOne(req.body);
+    const origem = req.get("Referer");
+    res.redirect(origem);
+});
+
+// deleta o item
+app.get("/estoque-del/:id", async function(req, res){
+    const id = new ObjectId(req.params.id);
+
+    const resultado = await estoque.deleteOne({_id: id});
+    const origem = req.get("Referer");
+    res.redirect(origem);
 });
 
 app.listen(port, () => 

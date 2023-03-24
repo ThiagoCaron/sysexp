@@ -13,6 +13,10 @@ $(document).ready(function(){
             linha +="<td>"+item.quantidade +"</td>";
             linha +="<td>"+item.destino +"</td>";
 
+            linha += "<td>";  
+            linha += "<a href='http://localhost:3000/estoque-del/"+ item._id +"' class='btn btn-danger btn-sm'>X</a>";
+            linha += "</td>";
+
             linha +="</tr>";
 
             $("#listagem").append(linha);
