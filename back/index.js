@@ -2,8 +2,9 @@ const { json } = require("express");
 const express = require("express")
 const app = express()
 const port = 3000;
-var csv =  require("node-csv").createParser();
 
+
+var csv =  require("node-csv").createParser();
 var cors = require("cors");
 app.use(cors());
 app.use(express.json());
@@ -70,6 +71,24 @@ app.post("/estoque-add", async function(req, res){
     const resultado = await estoque.insertOne(req.body);
     const origem = req.get("Referer");
     res.redirect(origem);
+});
+
+// atualiza um registro
+app.post("/estoque-up", async function(req, res){
+    const codigo = new ObjectId(req.body.codigo);
+    const dadosNovos = {
+        $set: {
+            nota: req.body.nota,
+            produto: req.body.produto,
+            quantidade: req.body.quantidade,
+            destino: req.body.destino
+        }
+    }
+    const resultado = await estoque.updateOne({_id: codigo}, dadosNovos)
+
+    const origem = req.get("Referer");
+    res.redirect(origem);
+
 });
 
 // deleta o item
