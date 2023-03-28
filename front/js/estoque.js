@@ -21,7 +21,7 @@ $(document).ready(function(){
 
             linha +="</tr>";
 
-            // adiciona linha tabela
+            // adiciona linha na tabela
             $("#listagem").append(linha);
         });// fim do forEach
             // abrir modal
