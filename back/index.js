@@ -100,6 +100,20 @@ app.get("/estoque-del/:id", async function(req, res){
     res.redirect(origem);
 });
 
+app.post("/login", function(req, res){
+
+    var usuario = req.body.email;
+    var senha = req.body.senha;
+    if(usuario == "Thiago" && senha == "123")
+    {
+        res.send({status: "ok"});
+    }
+    else
+    {
+        res.send({status: "erro", "mensagem": "Usuário e senha não encontrados"});
+    }
+});
+
 app.listen(port, () => 
 {
     console.log("Rodando o servidor na porta ${port}")

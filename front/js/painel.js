@@ -1,4 +1,12 @@
 $(document).ready(function(){
+
+    let usuario = sessionStorage.getItem("usuario");
+
+    if(usuario == null)
+    {
+        location.href = "login.html";
+    }
+
     function exibeData()
     {
         var dia = new Date();

@@ -7,6 +7,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <script src="js/jquery-3.6.4.min.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="js/login.js"></script>
 
     <style>
         .form-login
@@ -19,15 +20,19 @@
 </head>
 <body>
     <main class="form-login w-100 m-auto">
-        <form>
+        <!--<form action="http://localhost:3000/login" method="post"> -->
           <h1 class="h3 mb-3 fw-normal">Entrar no sistema</h1>
+
+          <div id="alert-login" class="alert alert-danger" role="alert">
+            Usuário ou senha incorretos
+          </div>
       
           <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input name="email" type="text" class="form-control" id="email" placeholder="name@example.com">
             <label for="floatingInput">Email</label>
           </div>
           <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input name="senha" type="password" class="form-control" id="senha" placeholder="Password">
             <label for="floatingPassword">Senha</label>
           </div>
       
@@ -35,7 +40,7 @@
             <label>
             </label>
           </div>
-          <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+          <button id="btn-entrar" class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
           <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
         </form>
       </main>
