@@ -1,7 +1,7 @@
 // Seleciona o banco de dados
-use("sysexp");
+//use("sysexp");
 
-db.estoque.find({});
+//db.estoque.find({});
 
 //db.estoque.find({quantidade: {$gt:5}});
 

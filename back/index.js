@@ -2,10 +2,11 @@ const { json } = require("express");
 const express = require("express")
 const app = express()
 const port = 3000;
+var csv =  require("node-csv").createParser();
 const sha1 = require('sha1');
 
-var csv =  require("node-csv").createParser();
 var cors = require("cors");
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
@@ -99,6 +100,7 @@ app.get("/estoque-del/:id", async function(req, res){
     const origem = req.get("Referer");
     res.redirect(origem);
 });
+// fim do deleta item
 
 app.post("/login", async function(req, res){
 
@@ -110,8 +112,6 @@ app.post("/login", async function(req, res){
     const usuarios = conexao.db("sysexp").collection("usuarios");
 
     var logado = await usuarios.findOneAndUpdate({ _id: usuario, senha: hash},{$currentDate: {ultimoLogin: true}});
-
-    res.json(logado);
 
     if(logado.value != null)
     {
@@ -125,5 +125,5 @@ app.post("/login", async function(req, res){
 
 app.listen(port, () => 
 {
-    console.log("Rodando o servidor na porta ${port}")
+    console.log(`Rodando o servidor na porta ${port}`)
 });
