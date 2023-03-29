@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    // trava se o usuário não estiver logado
     let usuario = sessionStorage.getItem("usuario");
 
     if(usuario == null)
@@ -7,6 +8,7 @@ $(document).ready(function(){
         location.href = "login.html";
     }
 
+    // atualizando a data e hora
     function exibeData()
     {
         var dia = new Date();
@@ -18,4 +20,10 @@ $(document).ready(function(){
     }
 
     setInterval(exibeData, 500);
+
+    // botão logout
+    $("#btn-logout").click(function(){
+        sessionStorage.clear();
+        location.href = "login.html"
+    });;// fim do botão logout
 });

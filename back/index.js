@@ -2,7 +2,7 @@ const { json } = require("express");
 const express = require("express")
 const app = express()
 const port = 3000;
-
+const sha1 = require('sha1');
 
 var csv =  require("node-csv").createParser();
 var cors = require("cors");
@@ -100,11 +100,20 @@ app.get("/estoque-del/:id", async function(req, res){
     res.redirect(origem);
 });
 
-app.post("/login", function(req, res){
+app.post("/login", async function(req, res){
 
     var usuario = req.body.email;
     var senha = req.body.senha;
-    if(usuario == "Thiago" && senha == "123")
+
+    var hash = sha1(senha);
+
+    const usuarios = conexao.db("sysexp").collection("usuarios");
+
+    var logado = await usuarios.findOneAndUpdate({ _id: usuario, senha: hash},{$currentDate: {ultimoLogin: true}});
+
+    res.json(logado);
+
+    if(logado.value != null)
     {
         res.send({status: "ok"});
     }
