@@ -40,6 +40,10 @@ app.get("/entradas", function(req, res)
     });
 });
 
+app.get("/propostas", function(req, res){
+    res.json("retornou");
+});
+
 app.get("/estoque", async function(req, res){
     
     const resultado = await estoque.find({}).toArray();
