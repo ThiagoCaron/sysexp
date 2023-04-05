@@ -15,7 +15,9 @@ use("sysexp")
 //    ultimoLogin: null
 //});
 
-db.usuarios.findOne({
-    _id: "thiago@aluno.com",
-    senha: "7110eda4d09e062aa5e4a390b0a572ac0d2c0220"
-})
+//db.usuarios.findOne({
+//    _id: "thiago@aluno.com",
+//    senha: "7110eda4d09e062aa5e4a390b0a572ac0d2c0220"
+//})
+
+//db.clientes.updateMany({cidade: ""}, {$set: {cidade: "Araucária"}})

@@ -16,6 +16,7 @@ const url_mongo = "mongodb+srv://ThiagoCaronServi:ThiagoCaron@cluster0.6sctrse.m
 
 const conexao = new mongodb.MongoClient(url_mongo);
 const estoque = conexao.db("sysexp").collection("estoque");
+const clientes = conexao.db("sysexp").collection("clientes");
 
 const ObjectId = mongodb.ObjectId;
 
@@ -78,7 +79,66 @@ app.post("/estoque-add", async function(req, res){
     res.redirect(origem);
 });
 
-// atualiza um registro
+app.get("/clientes", async function(req, res){
+    const resultado = await clientes.find({}).toArray();
+    res.json(resultado);
+});
+
+app.get("/clientes/:id", async function(req, res){
+    //res.json(req.params);
+    const id = new ObjectId(req.params.id);
+    const resultado = await clientes.findOne({_id: id});
+    res.json(resultado);
+});
+
+// cadastra novo cliente
+app.post("/clientes-add", async function(req, res){
+
+    const resultado = await clientes.insertOne(req.body);
+    const origem = req.get("Referer");
+    res.redirect(origem);
+});
+
+app.get("/clientes-del/:id", async function(req, res){
+    const id = new ObjectId(req.params.id);
+
+    const resultado = await clientes.deleteOne({_id: id});
+    const origem = req.get("Referer");
+    res.redirect(origem);
+});
+
+// atualiza o registro do cliente
+app.post("/clientes-up", async function(req, res){
+    const codigo = new ObjectId(req.body.codigoClientes);
+    const dadosNovos = {
+        $set: {
+            nomeCompleto: req.body.nomeCompleto,
+            dataNascimento: req.body.dataNascimento,
+            email: req.body.email,
+            tipoPessoa: req.body.tipoPessoa,
+            cpf: req.body.cpf,
+            rg: req.body.rg,
+            genero: req.body.genero,
+            contato: req.body.contato,
+            telComercial: req.body.telComercial,
+            telCelular: req.body.telCelular,
+            cargo: req.body.cargo,
+            cep: req.body.cep,
+            rua: req.body.rua,
+            casaNumero: req.body.casaNumero,
+            cidade: req.body.cidade,
+            bairro: req.body.bairro,
+            estado: req.body.estado
+        }
+    }
+    const resultado = await clientes.updateOne({_id: codigo}, dadosNovos)
+
+    const origem = req.get("Referer");
+    res.redirect(origem);
+
+});
+
+// atualiza o registro do estoque
 app.post("/estoque-up", async function(req, res){
     const codigo = new ObjectId(req.body.codigo);
     const dadosNovos = {

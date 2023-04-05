@@ -24,7 +24,8 @@ $(document).ready(function(){
             // adiciona linha na tabela
             $("#listagem").append(linha);
         });// fim do forEach
-            // abrir modal
+        
+        // abrir modal
         $(".btn-editar").click(function(){
 
             const id = $(this).attr("codigo");
@@ -48,5 +49,9 @@ $(document).ready(function(){
     $("#btn-salvar").click(function(){
         $("#form-editar").submit();
     });// fim do btn salvar produto
+
+    $("#btn-adicionar").click(function (req, res){
+        location.href = "clientes-add.html";
+    });
 
 });
